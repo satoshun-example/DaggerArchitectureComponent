@@ -6,9 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.satoshun.dagger.arch.example.R
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class MainFragment : DaggerFragment() {
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+  @Inject lateinit var viewModel: MainViewModel
+
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+  ): View {
     return inflater.inflate(R.layout.main_frag, container, false)
   }
 
