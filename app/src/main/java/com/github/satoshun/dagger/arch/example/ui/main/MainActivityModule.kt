@@ -7,13 +7,18 @@ import android.support.v4.app.FragmentActivity
 import com.github.satoshun.dagger.arch.example.PerActivity
 import com.github.satoshun.dagger.arch.example.PerFragment
 import com.github.satoshun.dagger.arch.example.get
+import dagger.Binds
 import dagger.MembersInjector
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Inject
 
 @Module
 abstract class MainActivityModule {
+  @Binds
+  abstract fun bindActivity(activity: MainActivity): FragmentActivity
+
   @PerActivity
   @ContributesAndroidInjector(modules = [
     MainViewModelProviderModule::class,
@@ -25,28 +30,25 @@ abstract class MainActivityModule {
 @Module
 class MainViewModelProviderModule {
   @Provides
-  fun provideViewModel(
-      activity: MainActivity,
-      injector: MembersInjector<MainViewModel>
-  ): MainViewModel {
-    return activity.provideViewModel(injector)
+  fun provideViewModel(creator: ViewModelCreator<MainViewModel>): MainViewModel {
+    return creator().get()
   }
 }
 
-inline fun <reified T : ViewModel> FragmentActivity.provideViewModel(
-    injector: MembersInjector<T>
-): T {
-  return ViewModelProviders.of(this, ViewModelInjectorFactory(
-      T::class.java::newInstance, injector
-  )).get()
+class ViewModelCreator<T : ViewModel> @Inject constructor(
+    private val activity: FragmentActivity,
+    private val factory: ViewModelInjectorFactory<T>
+) {
+  operator fun invoke(): ViewModelProvider {
+    return ViewModelProviders.of(activity, factory)
+  }
 }
 
-class ViewModelInjectorFactory<T : ViewModel>(
-    private val newInstance: () -> T,
+class ViewModelInjectorFactory<T : ViewModel> @Inject constructor(
     private val injector: MembersInjector<T>
 ) : ViewModelProvider.Factory {
-  override fun <T : ViewModel> create(modelClass: Class<T>): T {
-    return newInstance().apply { injector.injectMembers(this) } as T
+  override fun <V : ViewModel> create(modelClass: Class<V>): V {
+    return modelClass.newInstance().apply { injector.injectMembers(this as T) }
   }
 }
 

@@ -1,13 +1,16 @@
 package com.github.satoshun.dagger.arch.example
 
 import android.app.Application
+import android.arch.lifecycle.ViewModel
 import com.github.satoshun.dagger.arch.example.ui.main.MainActivityModule
 import dagger.Component
+import dagger.MapKey
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
+import kotlin.reflect.KClass
 
 @Singleton
 @Component(modules = [
@@ -42,10 +45,10 @@ class AppModule(private val app: App) {
 //  }
 //}
 
-//@MustBeDocumented
-//@Target(AnnotationTarget.FUNCTION)
-//@Retention(AnnotationRetention.RUNTIME)
-//@MapKey
-//annotation class ViewModelKey(
-//    val value: KClass<out ViewModel>
-//)
+@MustBeDocumented
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
+@MapKey
+annotation class ViewModelKey(
+    val value: KClass<out ViewModel>
+)
