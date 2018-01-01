@@ -16,9 +16,6 @@ import javax.inject.Inject
 
 @Module
 abstract class MainActivityModule {
-  @Binds
-  abstract fun bindActivity(activity: MainActivity): FragmentActivity
-
   @PerActivity
   @ContributesAndroidInjector(modules = [
     MainViewModelProviderModule::class,
@@ -27,12 +24,18 @@ abstract class MainActivityModule {
   abstract fun contributeMainActivity(): MainActivity
 }
 
-@Module
+@Module(includes = [MainActivityProviderModule::class])
 class MainViewModelProviderModule {
   @Provides
   fun provideViewModel(creator: ViewModelCreator<MainViewModel>): MainViewModel {
     return creator().get()
   }
+}
+
+@Module
+abstract class MainActivityProviderModule {
+  @Binds
+  abstract fun bindActivity(activity: MainActivity): FragmentActivity
 }
 
 class ViewModelCreator<T : ViewModel> @Inject constructor(
