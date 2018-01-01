@@ -9,6 +9,7 @@ import javax.inject.Inject
 class MainActivityPresenter @Inject constructor(
     private val viewModelStore: Lazy<MainViewModel>
 ) {
+  // must be call after Activity#onCreate
   private val viewModel get() = viewModelStore.get()
 
   fun emitTimber() {

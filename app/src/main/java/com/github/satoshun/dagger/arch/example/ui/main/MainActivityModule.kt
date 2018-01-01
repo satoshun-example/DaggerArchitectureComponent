@@ -1,24 +1,12 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
-import com.github.satoshun.dagger.arch.example.PerActivity
-import com.github.satoshun.dagger.arch.example.PerFragment
-import com.github.satoshun.dagger.arch.example.get
-import dagger.Binds
-import dagger.MembersInjector
+import com.github.satoshun.dagger.arch.example.*
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import javax.inject.Inject
 
 @Module
 abstract class MainActivityModule {
-  @Binds
-  abstract fun bindActivity(activity: MainActivity): FragmentActivity
-
   @PerActivity
   @ContributesAndroidInjector(modules = [
     MainViewModelProviderModule::class,
@@ -27,7 +15,7 @@ abstract class MainActivityModule {
   abstract fun contributeMainActivity(): MainActivity
 }
 
-@Module
+@Module(includes = [MainActivityProviderModule::class])
 class MainViewModelProviderModule {
   @Provides
   fun provideViewModel(creator: ViewModelCreator<MainViewModel>): MainViewModel {
@@ -35,33 +23,8 @@ class MainViewModelProviderModule {
   }
 }
 
-class ViewModelCreator<T : ViewModel> @Inject constructor(
-    private val activity: FragmentActivity,
-    private val factory: ViewModelInjectorFactory<T>
-) {
-  operator fun invoke(): ViewModelProvider {
-    return ViewModelProviders.of(activity, factory)
-  }
-}
-
-class ViewModelInjectorFactory<T : ViewModel> @Inject constructor(
-    private val injector: MembersInjector<T>
-) : ViewModelProvider.Factory {
-  override fun <V : ViewModel> create(modelClass: Class<V>): V {
-    return modelClass.newInstance().apply { injector.injectMembers(this as T) }
-  }
-}
-
-//@Module
-// abstract class ViewModelModule {
-//  @Binds
-//  @IntoMap
-//  @ViewModelKey(MainViewModel::class)
-//  abstract fun bindUserViewModel(viewModel: MainViewModel): ViewModel
-//
-//  @Binds
-//  abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-//}
+@Module
+abstract class MainActivityProviderModule : ActivityProviderModule<MainActivity>()
 
 @Module
 abstract class MainFragmentModule {

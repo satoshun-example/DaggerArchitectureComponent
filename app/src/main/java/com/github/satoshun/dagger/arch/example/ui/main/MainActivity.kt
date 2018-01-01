@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import com.github.satoshun.dagger.arch.example.R
 import com.github.satoshun.io.reactivex.lifecycleowner.subscribeOf
+import dagger.MembersInjector
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {

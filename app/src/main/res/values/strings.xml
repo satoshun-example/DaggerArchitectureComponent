@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">DaggerArchitectureComponent</string>
+  <string name="title_activity_sub">SubActivity</string>
+  <string name="action_settings">Settings</string>
 </resources>
