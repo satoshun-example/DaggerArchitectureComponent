@@ -1,11 +1,6 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
-import android.support.v4.app.FragmentActivity
-import com.github.satoshun.dagger.arch.example.PerActivity
-import com.github.satoshun.dagger.arch.example.PerFragment
-import com.github.satoshun.dagger.arch.example.ViewModelCreator
-import com.github.satoshun.dagger.arch.example.get
-import dagger.Binds
+import com.github.satoshun.dagger.arch.example.*
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -29,10 +24,7 @@ class MainViewModelProviderModule {
 }
 
 @Module
-abstract class MainActivityProviderModule {
-  @Binds
-  abstract fun bindActivity(activity: MainActivity): FragmentActivity
-}
+abstract class MainActivityProviderModule : ActivityProviderModule<MainActivity>()
 
 @Module
 abstract class MainFragmentModule {
