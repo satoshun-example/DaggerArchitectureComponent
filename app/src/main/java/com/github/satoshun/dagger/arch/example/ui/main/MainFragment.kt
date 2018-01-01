@@ -1,6 +1,7 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.github.satoshun.dagger.arch.example.R
+import com.github.satoshun.dagger.arch.example.ui.sub.SubActivity
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.main_frag.*
 import javax.inject.Inject
 
 class MainFragment : DaggerFragment() {
@@ -26,10 +29,11 @@ class MainFragment : DaggerFragment() {
     super.onViewCreated(view, savedInstanceState)
     presenter.live.observe(this, Observer { str ->
       (view as LinearLayout).addView(
-          TextView(view.context).apply {
-            text = str!!
-          }
+          TextView(view.context).apply { text = str!! }
       )
     })
+    new_activity.setOnClickListener {
+      startActivity(Intent(activity, SubActivity::class.java))
+    }
   }
 }
