@@ -3,18 +3,19 @@ package com.github.satoshun.dagger.arch.example.ui.main
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.github.satoshun.dagger.arch.example.Injectable
 import com.github.satoshun.dagger.arch.example.R
 import com.github.satoshun.dagger.arch.example.ui.sub.SubActivity
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_frag.*
 import javax.inject.Inject
 
-class MainFragment : DaggerFragment() {
+class MainFragment : Fragment(), Injectable {
   @Inject lateinit var presenter: MainFragmentPresenter
 
   override fun onCreateView(

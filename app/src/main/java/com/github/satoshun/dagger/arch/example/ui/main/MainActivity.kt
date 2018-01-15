@@ -1,18 +1,24 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.github.satoshun.dagger.arch.example.R
 import com.github.satoshun.io.reactivex.lifecycleowner.subscribeOf
-import dagger.MembersInjector
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.*
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    HasSupportFragmentInjector {
+
   @Inject lateinit var presenter: MainActivityPresenter
+  @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -27,4 +33,6 @@ class MainActivity : DaggerAppCompatActivity() {
           Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
   }
+
+  override fun supportFragmentInjector(): AndroidInjector<Fragment> = supportFragmentInjector
 }
