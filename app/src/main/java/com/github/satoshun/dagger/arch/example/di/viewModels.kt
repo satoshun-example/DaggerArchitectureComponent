@@ -1,4 +1,4 @@
-package com.github.satoshun.dagger.arch.example
+package com.github.satoshun.dagger.arch.example.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders

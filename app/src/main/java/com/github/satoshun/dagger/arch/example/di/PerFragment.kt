@@ -1,8 +1,8 @@
-package com.github.satoshun.dagger.arch.example
+package com.github.satoshun.dagger.arch.example.di
 
 import javax.inject.Scope
 
 @Scope
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
-annotation class PerViewModel
+annotation class PerFragment

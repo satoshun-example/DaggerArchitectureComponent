@@ -1,6 +1,6 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
-import com.github.satoshun.dagger.arch.example.PerActivity
+import com.github.satoshun.dagger.arch.example.di.PerActivity
 import io.reactivex.Single
 import javax.inject.Inject
 

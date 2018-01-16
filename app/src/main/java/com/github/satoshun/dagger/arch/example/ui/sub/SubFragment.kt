@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.satoshun.dagger.arch.example.Injectable
+import com.github.satoshun.dagger.arch.example.di.Injectable
 import com.github.satoshun.dagger.arch.example.R
 
 class SubFragment : Fragment(), Injectable {

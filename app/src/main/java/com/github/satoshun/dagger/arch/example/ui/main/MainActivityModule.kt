@@ -1,8 +1,8 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
-import com.github.satoshun.dagger.arch.example.ActivityProviderModule
-import com.github.satoshun.dagger.arch.example.PerActivity
-import com.github.satoshun.dagger.arch.example.PerFragment
+import com.github.satoshun.dagger.arch.example.di.ActivityProviderModule
+import com.github.satoshun.dagger.arch.example.di.PerActivity
+import com.github.satoshun.dagger.arch.example.di.PerFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

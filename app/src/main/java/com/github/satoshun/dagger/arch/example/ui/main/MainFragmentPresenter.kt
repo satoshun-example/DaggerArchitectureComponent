@@ -1,7 +1,7 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
 import android.arch.lifecycle.LiveData
-import com.github.satoshun.dagger.arch.example.PerFragment
+import com.github.satoshun.dagger.arch.example.di.PerFragment
 import javax.inject.Inject
 
 @PerFragment

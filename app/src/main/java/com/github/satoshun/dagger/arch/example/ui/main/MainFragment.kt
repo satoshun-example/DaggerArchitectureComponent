@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.github.satoshun.dagger.arch.example.Injectable
+import com.github.satoshun.dagger.arch.example.di.Injectable
 import com.github.satoshun.dagger.arch.example.R
 import com.github.satoshun.dagger.arch.example.ui.sub.SubActivity
 import kotlinx.android.synthetic.main.main_frag.*
