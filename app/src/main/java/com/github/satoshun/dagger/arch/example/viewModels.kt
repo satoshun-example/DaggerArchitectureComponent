@@ -1,15 +1,10 @@
 package com.github.satoshun.dagger.arch.example
 
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.FragmentActivity
 import dagger.Module
 import dagger.Provides
-
-inline fun <reified T : ViewModel> ViewModelProvider.get(): T {
-  return get(T::class.java)
-}
 
 @Module
 abstract class ActivityProviderModule<in T : FragmentActivity, VM : ViewModel>(
