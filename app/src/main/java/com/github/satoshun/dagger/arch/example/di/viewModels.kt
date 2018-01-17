@@ -1,27 +1,31 @@
 package com.github.satoshun.dagger.arch.example.di
 
 import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
+import dagger.MembersInjector
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
 
 @Module
-abstract class ActivityProviderModule<in T : FragmentActivity, VM : ViewModel>(
+abstract class ViewModelModule<VM : ViewModel>(
     private val kclass: Class<VM>
 ) {
   @Provides
-  fun providedActivity(activity: T): FragmentActivity = activity
-
-  @Provides
-  fun provideClass(): Class<VM> = kclass
-
-  @Provides
   fun provideViewModel(
-      activity: FragmentActivity,
-      kclass: Class<VM>,
+      activity: AppCompatActivity,
       factory: ViewModelInjectorFactory<VM>
   ): VM {
     return ViewModelProviders.of(activity, factory).get(kclass)
+  }
+}
+
+class ViewModelInjectorFactory<T : ViewModel> @Inject constructor(
+    private val injector: MembersInjector<T>
+) : ViewModelProvider.Factory {
+  override fun <V : ViewModel> create(modelClass: Class<V>): V {
+    return modelClass.newInstance().apply { injector.injectMembers(this as T) }
   }
 }

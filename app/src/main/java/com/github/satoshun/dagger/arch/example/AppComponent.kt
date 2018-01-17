@@ -1,8 +1,8 @@
 package com.github.satoshun.dagger.arch.example
 
 import android.app.Application
-import com.github.satoshun.dagger.arch.example.ui.main.MainActivityModule
-import com.github.satoshun.dagger.arch.example.ui.sub.SubActivityModule
+import com.github.satoshun.dagger.arch.example.ui.main.MainActivityBuilder
+import com.github.satoshun.dagger.arch.example.ui.sub.SubActivityBuilder
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -14,8 +14,8 @@ import javax.inject.Singleton
 @Component(modules = [
   AndroidSupportInjectionModule::class,
   AppModule::class,
-  MainActivityModule::class,
-  SubActivityModule::class
+  MainActivityBuilder::class,
+  SubActivityBuilder::class
 ])
 interface AppComponent : AndroidInjector<App>
 

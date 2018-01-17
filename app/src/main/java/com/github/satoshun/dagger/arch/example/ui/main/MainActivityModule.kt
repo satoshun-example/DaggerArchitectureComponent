@@ -1,25 +1,33 @@
 package com.github.satoshun.dagger.arch.example.ui.main
 
-import com.github.satoshun.dagger.arch.example.di.ActivityProviderModule
+import android.support.v7.app.AppCompatActivity
 import com.github.satoshun.dagger.arch.example.di.PerActivity
 import com.github.satoshun.dagger.arch.example.di.PerFragment
+import com.github.satoshun.dagger.arch.example.di.ViewModelModule
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainActivityModule {
+abstract class MainActivityBuilder {
   @PerActivity
   @ContributesAndroidInjector(modules = [
-    MainActivityProviderModule::class,
+    MainActivityModule::class,
+    MainViewModelModule::class,
     MainFragmentModule::class
   ])
   abstract fun contributeMainActivity(): MainActivity
 }
 
 @Module
-class MainActivityProviderModule : ActivityProviderModule<MainActivity, MainViewModel>(
-    MainViewModel::class.java
-)
+interface MainActivityModule {
+  @Binds
+  fun providesAppCompatActivity(mainActivity: MainActivity): AppCompatActivity
+}
+
+@Module
+class MainViewModelModule : ViewModelModule<MainViewModel>(MainViewModel::class.java)
+
 
 @Module
 abstract class MainFragmentModule {
