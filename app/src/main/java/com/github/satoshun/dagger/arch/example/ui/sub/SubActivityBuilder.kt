@@ -9,14 +9,14 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class SubActivityBuilder {
+interface SubActivityBuilder {
   @PerActivity
   @ContributesAndroidInjector(modules = [
     SubActivityModule::class,
     SubViewModelModule::class,
     SubFragmentModule::class
   ])
-  abstract fun contributeSubActivity(): SubActivity
+  fun contributeSubActivity(): SubActivity
 }
 
 @Module
@@ -29,8 +29,8 @@ interface SubActivityModule {
 class SubViewModelModule : ViewModelModule<SubViewModel>(SubViewModel::class.java)
 
 @Module
-abstract class SubFragmentModule {
+interface SubFragmentModule {
   @PerFragment
   @ContributesAndroidInjector
-  abstract fun contributeSubFragment(): SubFragment
+  fun contributeSubFragment(): SubFragment
 }

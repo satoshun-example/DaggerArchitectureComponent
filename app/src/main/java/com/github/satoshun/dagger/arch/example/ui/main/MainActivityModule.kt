@@ -9,14 +9,14 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainActivityBuilder {
+interface MainActivityBuilder {
   @PerActivity
   @ContributesAndroidInjector(modules = [
     MainActivityModule::class,
     MainViewModelModule::class,
     MainFragmentModule::class
   ])
-  abstract fun contributeMainActivity(): MainActivity
+  fun contributeMainActivity(): MainActivity
 }
 
 @Module
@@ -30,8 +30,8 @@ class MainViewModelModule : ViewModelModule<MainViewModel>(MainViewModel::class.
 
 
 @Module
-abstract class MainFragmentModule {
+interface MainFragmentModule {
   @PerFragment
   @ContributesAndroidInjector
-  abstract fun contributeMainFragment(): MainFragment
+  fun contributeMainFragment(): MainFragment
 }
