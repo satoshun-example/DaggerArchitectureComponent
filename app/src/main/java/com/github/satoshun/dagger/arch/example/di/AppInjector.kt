@@ -10,7 +10,7 @@ import com.github.satoshun.dagger.arch.example.App
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
-import java.util.concurrent.atomic.*
+import java.util.concurrent.atomic.AtomicBoolean
 
 fun App.applyInjector() {
   registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
@@ -39,6 +39,9 @@ fun App.applyInjector() {
 }
 
 private fun handleActivity(activity: Activity) {
+  // it's illegal injection cuz Fragments doesn't restore at point
+  // so call AndroidInjection.inject(activity) after restored Fragments
+  // AndroidInjection.inject(activity)
   val flag = AtomicBoolean(true)
   (activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(
       object : FragmentManager.FragmentLifecycleCallbacks() {
