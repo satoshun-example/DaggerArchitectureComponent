@@ -13,24 +13,29 @@ it's sample code for MainActivity and MainViewModel.
 
 ```kotlin
 @Module
-abstract class MainActivityModule {
+interface MainActivityBuilder {
   @PerActivity
   @ContributesAndroidInjector(modules = [
-    MainActivityProviderModule::class,
+    MainActivityModule::class,
+    MainViewModelModule::class,
     MainFragmentModule::class
   ])
-  abstract fun contributeMainActivity(): MainActivity
+  fun contributeMainActivity(): MainActivity
 }
 
 @Module
-class MainActivityProviderModule : ActivityProviderModule<MainActivity, MainViewModel>(
-    MainViewModel::class.java
-)
+interface MainActivityModule {
+  @Binds
+  fun providesAppCompatActivity(mainActivity: MainActivity): AppCompatActivity
+}
 
 @Module
-abstract class MainFragmentModule {
+class MainViewModelModule : ViewModelModule<MainViewModel>(MainViewModel::class.java)
+
+@Module
+interface MainFragmentModule {
   @PerFragment
   @ContributesAndroidInjector
-  abstract fun contributeMainFragment(): MainFragment
+  fun contributeMainFragment(): MainFragment
 }
 ```
