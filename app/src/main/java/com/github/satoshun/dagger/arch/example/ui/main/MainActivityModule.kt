@@ -28,7 +28,6 @@ interface MainActivityModule {
 @Module
 class MainViewModelModule : ViewModelModule<MainViewModel>(MainViewModel::class.java)
 
-
 @Module
 interface MainFragmentModule {
   @PerFragment

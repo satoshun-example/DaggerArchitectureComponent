@@ -11,7 +11,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),
