@@ -40,8 +40,8 @@ fun App.applyInjector() {
 
 private fun handleActivity(activity: Activity) {
   // it's illegal injection cuz Fragments doesn't restore at point
-  // so call AndroidInjection.inject(activity) after restored Fragments
-  // AndroidInjection.inject(activity)
+  // so AndroidInjection.inject(activity) should be call after restored Fragments
+  // AndroidInjection.inject(activity) //
   val flag = AtomicBoolean(true)
   (activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(
       object : FragmentManager.FragmentLifecycleCallbacks() {
